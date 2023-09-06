@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Course Management Application</h1>
+<table style="border: solid">
+    <thead>
+    <tr>
+        <th> Course Code</th>
+        <th> Course Name</th>
+        <th> Course Instructor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course: ${courses}">
+        <td th:text="${course.getCourseID()}">CPTS101</td>
+        <td th:text="${course.getCourseName()}">Intro to EECS</td>
+        <td th:text="${course.getInstructor().getFirstName()}+' '+${course.getInstructor().getLastName()}">subu</td>
+    </tr>
+    </tbody>
+</table>
+<h2> Course Creation Form</h2>
+<form action=""  th:action="@{/createCourse}" th:object="${course}" method="post">
+    <p> Course Code: <input th:field="*{courseID}" type="text" name="courseID" id="courseID"></p>
+    <p> Course Code: <input th:field="*{courseName}" type="text" name="courseName" id="courseName"></p>
+    <p>Instructor:
+        <select th:field="*{instructor}" name="instructor" id="instructor">
+            <option th:each="instructor: ${instructors}" th:value="${instructor.id}"
+                    th:text="${instructor.firstName}+' '+${instructor.lastName}"
+                    value="test">test</option>
+        </select>
+    </p>
+    <p><input type="submit" value="submit"></p>
+</form>
+</body>
+</html>
